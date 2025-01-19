@@ -41,8 +41,14 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intent);
+
+                if (Username.getText().toString().equals("")){
+                    Intent intent = new Intent(MainActivity.this, AdminHomeActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
