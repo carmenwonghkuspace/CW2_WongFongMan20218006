@@ -51,7 +51,6 @@ public class AdminHomeActivity extends AppCompatActivity {
                 }
 
                 List<User> users = response.body();
-                // Update your UI with the list of users
 
                 List<String> tList = new ArrayList<String>();
                 for(int i = 0; i < users.size();i++) {

@@ -43,6 +43,13 @@ public class RegisterActicity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        signUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActicity.this, MainActivity.class);
+                startActivity(intent);
 
+            }
+        });
     }
 }
