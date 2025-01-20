@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (Username.getText().toString().equals("")){
+                if (Username.getText().toString().equals("admin")){
                     Intent intent = new Intent(MainActivity.this, AdminHomeActivity.class);
                     startActivity(intent);
                 }else {
