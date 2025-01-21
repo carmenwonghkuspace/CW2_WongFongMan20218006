@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         btneditprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                Intent intent = new Intent(HomeActivity.this, Edit_userProfile.class);
                 startActivity(intent);
             }
         });
