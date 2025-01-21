@@ -1,14 +1,17 @@
 package com.example.cw2;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AdminHomeActivity extends AppCompatActivity {
 
-
     ListView list_view;
-
     ArrayAdapter<String> arrayAdapter;
 
     @Override
@@ -32,7 +33,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_home);
 
-        list_view=(ListView) findViewById(R.id.list_view);
+        list_view = (ListView) findViewById(R.id.list_view);
         arrayAdapter = new ArrayAdapter<>(this, R.layout.listview_employee, R.id.name);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -53,7 +54,7 @@ public class AdminHomeActivity extends AppCompatActivity {
                 List<User> users = response.body();
 
                 List<String> tList = new ArrayList<String>();
-                for(int i = 0; i < users.size();i++) {
+                for (int i = 0; i < users.size(); i++) {
                     String name = users.get(i).surname.concat(" ").concat(users.get(i).forename);
                     tList.add(name);
                 }
@@ -67,6 +68,5 @@ public class AdminHomeActivity extends AppCompatActivity {
                 // Handle the failure scenario here
             }
         });
-
-        };
     }
+}

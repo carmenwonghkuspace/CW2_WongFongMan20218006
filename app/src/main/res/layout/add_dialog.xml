@@ -8,16 +8,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        >
+        android:background="@color/gray"
+        android:gravity="center_vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Details"
             android:textSize="24dp"
             android:textColor="#FFF"
-            android:layout_marginStart="30dp" />
+            android:layout_marginStart="30dp"/>
     </LinearLayout>
 
     <EditText
@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="enter new ID here"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp" />
@@ -54,13 +55,12 @@
         >
 
         <Button
-            android:id="@+id/buttonBack"
+            android:id="@+id/button_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:text="Back"
-            />
+            android:text="Back" />
 
         <Button
             android:id="@+id/button_ok"
@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:text="Done"/>
+            android:text="Done" />
     </LinearLayout>
 
 
