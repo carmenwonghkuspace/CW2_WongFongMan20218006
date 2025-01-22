@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import androidx.activity.EdgeToEdge;
@@ -31,6 +32,17 @@ public class Edit_userProfile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Edit_userProfile.this, HomeActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+
+                }else{
+
+                }
             }
         });
     };

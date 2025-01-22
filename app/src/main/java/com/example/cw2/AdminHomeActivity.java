@@ -1,6 +1,7 @@
 package com.example.cw2;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,7 +26,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AdminHomeActivity extends AppCompatActivity {
 
     ListView list_view;
-    ArrayAdapter<String> arrayAdapter;
+    CustomAdapter arrayAdapter;
+    Button btCustomDialog;
+    Button btOK;
+    Button btC;
+    EditText newid, newsurname, newforename;
+
+    List<User> tList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +41,18 @@ public class AdminHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
 
         list_view = (ListView) findViewById(R.id.list_view);
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.listview_employee, R.id.name);
+        btCustomDialog = (Button) findViewById(R.id.btCustomDialog);
+
+        btCustomDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCustomDialog();
+            }
+        });
+
+        tList = new ArrayList<User>();
+        arrayAdapter = new CustomAdapter(tList, (Context) this);
+        list_view.setAdapter(arrayAdapter);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://web.socem.plymouth.ac.uk/COMP2000/api/")
@@ -53,14 +71,10 @@ public class AdminHomeActivity extends AppCompatActivity {
 
                 List<User> users = response.body();
 
-                List<String> tList = new ArrayList<String>();
                 for (int i = 0; i < users.size(); i++) {
-                    String name = users.get(i).surname.concat(" ").concat(users.get(i).forename);
-                    tList.add(name);
+                    tList.add(users.get(i));
                 }
-
-                arrayAdapter.addAll(tList);
-                list_view.setAdapter(arrayAdapter);
+                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -69,4 +83,36 @@ public class AdminHomeActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setCustomDialog(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(AdminHomeActivity.this);
+        View v = getLayoutInflater().inflate(R.layout.add_dialog,null);
+        alertDialog.setView(v);
+        btOK = v.findViewById(R.id.button_ok);
+        btC  = v.findViewById(R.id.button_back);
+        newid = v.findViewById(R.id.newid);
+        newsurname = v.findViewById(R.id.newsurname);
+        newforename = v.findViewById(R.id.newforename);
+
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+        btOK.setOnClickListener((v1 -> {
+            User user = new User();
+            user.id = (int) Integer.valueOf(newid.getText().toString());
+            user.surname = newsurname.getText().toString();
+            user.forename = newforename.getText().toString();
+            updateList(user);
+            dialog.dismiss();
+        }));
+
+        btC.setOnClickListener((v1 -> {dialog.dismiss();}));
+    };
+
+    public void updateList(User newName){
+        tList.add(newName);
+        arrayAdapter.notifyDataSetChanged();;
+    }
+
+
 }
