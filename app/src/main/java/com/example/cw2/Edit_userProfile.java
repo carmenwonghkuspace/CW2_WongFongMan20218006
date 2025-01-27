@@ -1,6 +1,14 @@
 package com.example.cw2;
 
+import static android.icu.number.NumberFormatter.with;
+
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,14 +17,17 @@ import android.widget.Switch;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class Edit_userProfile extends AppCompatActivity {
 
     Switch aSwitch;
     Button btnBack;
+
+    private String CHANNEL_ID = "Test";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +50,28 @@ public class Edit_userProfile extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-
+                    notification();
                 }else{
 
                 }
             }
         });
     };
+
+    public void notification(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("Title")
+                .setContentText("Content");
+        NotificationManagerCompat notMgr = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS},1);
+            return;
+        }
+        notMgr.notify(1, builder.build());
+
+    }
 }
